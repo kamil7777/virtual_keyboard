@@ -38,7 +38,7 @@ function addHighLight(event) {
       if (!event.target.dataset.spec) {
         textarea.textContent += event.key;
       }
-      /* if (event.code !== 'CapsLock')  */item.classList.add('hover');
+      if (event.code !== 'CapsLock') item.classList.add('hover');
     }
   });
   textarea.focus();
