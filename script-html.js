@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-document.body.insertAdjacentHTML('afterbegin',`<h1>RSS Виртуальная клавиатура</h1>
+document.body.insertAdjacentHTML('afterbegin', `<h1>RSS Виртуальная клавиатура</h1>
 <textarea rows="15" cols="67" name="text" class="textarea"></textarea>
 <div class="container">
     <div class="key_line">

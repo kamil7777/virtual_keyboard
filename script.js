@@ -1,15 +1,22 @@
 /* eslint-disable linebreak-style */
-import translateObj from "./translate.js";
+// eslint-disable-next-line import/extensions
+import translateObj from './translate.js';
+
 // turn off highlight buttons
 const buttons = document.querySelectorAll('button');
 const keyLine = document.querySelector('.key_line');
-const capslock = document.querySelector('[data-name="CapsLock"]');
+const capsLock = document.querySelector('[data-name="CapsLock"]');
 const textarea = document.querySelector('.textarea');
 
 function deleteHighlight() {
-  buttons.forEach((item) => item.classList.remove('hover'));
+  buttons.forEach((item) => {
+    if (item.dataset.name !== 'CapsLock') {
+      item.classList.remove('hover');
+    }
+  });
 }
 document.addEventListener('keyup', deleteHighlight);
+
 // hihghlight virtual button at click mouse
 
 function keyListen(event) {
@@ -18,7 +25,6 @@ function keyListen(event) {
       textarea.focus();
       textarea.textContent += event.target.textContent;
       textarea.selectionStart = textarea.value.length;
-      /* buttons.keydown = (event) => event.preventDefault(); */
     }
   }
 }
@@ -29,10 +35,10 @@ keyLine.addEventListener('click', keyListen);
 function addHighLight(event) {
   buttons.forEach((item) => {
     if (event.code === item.dataset.name) {
-      if (event.target.dataset.spec) {
-        textarea.textContent += event.target.textContent;
+      if (!event.target.dataset.spec) {
+        textarea.textContent += event.key;
       }
-      item.classList.add('hover');
+      /* if (event.code !== 'CapsLock')  */item.classList.add('hover');
     }
   });
   textarea.focus();
@@ -55,7 +61,7 @@ function letterUp() {
       item.textContent = getUp(item);
     }
   });
-  capslock.classList.add('hover');
+  capsLock.classList.add('hover');
 }
 
 function letterDown() {
@@ -65,19 +71,23 @@ function letterDown() {
       item.textContent = getDown(item);
     }
   });
-  capslock.classList.remove('hover');
+  capsLock.classList.remove('hover');
 }
 
 function toggleCapsLock() {
-  if (capslock.classList.contains('hover')) {
+  if (capsLock.classList.contains('hover')) {
     letterDown();
   } else {
     letterUp();
   }
 }
 
-capslock.addEventListener('click', toggleCapsLock);
-capslock.addEventListener('keydown', toggleCapsLock);
+capsLock.addEventListener('click', toggleCapsLock);
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'CapsLock') {
+    toggleCapsLock();
+  }
+});
 
 // change language
 
@@ -98,10 +108,10 @@ function translateLetterEn() {
   lang = 'en';
 }
 
-document.onkeydown = function (event) {
-  if (event.code === 'ShiftLeft') {
-    document.onkeyup = function (event) {
-      if (event.code === 'AltLeft') {
+document.onkeydown = function pushCtrl(event) {
+  if (event.code === 'ControlLeft') {
+    document.onkeyup = function pushAlt(e) {
+      if (e.code === 'AltLeft') {
         if (lang === 'en') {
           translateLetterRu();
         } else {
