@@ -38,7 +38,6 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 8px;
   width: 725px;
   height: 248px;
   margin: 0 auto;
@@ -70,7 +69,10 @@ h1 {
   color: #FFFF;
   -webkit-transition: all .3s;
   transition: all .3s;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 0;
+  -webkit-box-shadow: 3px 3px 3px #000;
+          box-shadow: 3px 3px 3px #000;
 }
 
 .button:hover {
@@ -80,10 +82,21 @@ h1 {
   transition: all .3s;
 }
 
+.button:active {
+  -webkit-box-shadow: 1px 1px 1px #000;
+          box-shadow: 1px 1px 1px #000;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
 .hover {
   background-color: #bfdf8f;
   -webkit-transition: all .3s;
   transition: all .3s;
+  -webkit-box-shadow: 1px 1px 1px #000;
+          box-shadow: 1px 1px 1px #000;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
 }
 
 .two {
@@ -101,5 +114,11 @@ h1 {
 
 .space {
   width: 340px;
+}
+
+p {
+  font-size: 25px;
+  font-weight: bold;
+  padding-top: 10px;
 }
 /*# sourceMappingURL=style.css.map */
